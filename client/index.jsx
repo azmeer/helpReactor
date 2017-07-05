@@ -8,6 +8,7 @@ import Alert from './components/alert.jsx';
 import Nav from './components/nav.jsx';
 import Header from './components/header.jsx';
 import AdminDashboard from './components/adminDashboard.jsx';
+import SeatingChart from './components/seatingChart.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -19,7 +20,8 @@ class App extends React.Component {
       isAuthenticated: false,
       onlineUsers: {},
       statistic: {},
-      waitTime: 0
+      waitTime: 0,
+      isChartOn: false
     };
   }
 
@@ -169,7 +171,18 @@ class App extends React.Component {
     return $('.claim_btn').prop('disabled', false);
   }
 
-  viewSeatingChart() {
+
+handleClick() {
+  return this.setState(previousState => {
+    return { count: previousState.count + 1 }
+  });
+}
+
+  
+  viewSeatingChart(evt) {
+    evt.preventDefault();
+    console.log('calling viewSeatingChart. Toggling: ', this.state.isChartOn);
+    this.setState(previousState => { return {isChartOn: !previousState.isChartOn} });
   }
 
   render() {
@@ -197,6 +210,8 @@ class App extends React.Component {
       main = <AdminDashboard filterTickets={this.filterTickets.bind(this)} onlineUsers={this.state.onlineUsers} adminStats={this.state.statistic} ticketCategoryList={this.state.ticketCategoryList} />;
     }
 
+    const seating = this.state.isChartOn ? <SeatingChart /> : null;
+    
     return (
       <div>
         <Alert />
@@ -205,6 +220,7 @@ class App extends React.Component {
         <div className="container">
           {main}
           {list}
+          {seating}
         </div>
       </div>
     );

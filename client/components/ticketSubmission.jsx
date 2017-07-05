@@ -19,7 +19,7 @@ const TicketSubmission = ({viewSeatingChart, submitTickets, ticketCategoryList})
         <div className="col-xs-2">
       <button
         onClick={viewSeatingChart}
-        style={{position: 'absolute' , top: -35 , left: 300 , zIndex: -1}}
+        style={{position: 'absolute' , top: -35 , left: 300 , zIndex: 1000}}
         type="submit"
         id="ticket_submission_button"
         className="btn btn-primary"
