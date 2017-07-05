@@ -16,6 +16,9 @@ const TicketSubmission = ({submitTickets, ticketCategoryList}) => (
       <div className="col-xs-4">
         <label htmlFor="ticket_submission_location">Location</label>
         <input type="text" id="ticket_submission_location" className="form-control" name="location" placeholder="Your station number" />
+        <div className="col-xs-2">
+          <button onClick={submitTickets} style={{position: 'absolute' , top: -35 , left: 300 , zIndex: -1}} type="submit" id="ticket_submission_button" className="btn btn-primary">Use Seating Chart</button>
+        </div>
       </div>
     </div>
     <div className="row">
