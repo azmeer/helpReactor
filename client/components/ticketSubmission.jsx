@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const TicketSubmission = ({submitTickets, ticketCategoryList}) => (
+const TicketSubmission = ({viewSeatingChart, submitTickets, ticketCategoryList}) => (
   <form className="ticket_submission_form">
     <div className="form-group row">
       <div className="col-xs-12"><h3>Create a ticket</h3></div>
@@ -17,7 +17,14 @@ const TicketSubmission = ({submitTickets, ticketCategoryList}) => (
         <label htmlFor="ticket_submission_location">Location</label>
         <input type="text" id="ticket_submission_location" className="form-control" name="location" placeholder="Your station number" />
         <div className="col-xs-2">
-          <button onClick={submitTickets} style={{position: 'absolute' , top: -35 , left: 300 , zIndex: -1}} type="submit" id="ticket_submission_button" className="btn btn-primary">Use Seating Chart</button>
+      <button
+        onClick={viewSeatingChart}
+        style={{position: 'absolute' , top: -35 , left: 300 , zIndex: -1}}
+        type="submit"
+        id="ticket_submission_button"
+        className="btn btn-primary"
+      >
+        Use Seating Chart</button>
         </div>
       </div>
     </div>

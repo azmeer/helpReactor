@@ -169,6 +169,9 @@ class App extends React.Component {
     return $('.claim_btn').prop('disabled', false);
   }
 
+  viewSeatingChart() {
+  }
+
   render() {
     let user = this.state.user;
     let isAuthenticated = this.state.isAuthenticated;
@@ -187,7 +190,7 @@ class App extends React.Component {
       document.querySelector('BODY').style.backgroundColor = '#2b3d51';
       main = <Login />;
     } else if (isAuthenticated && user.role === 'student') {
-      main = <TicketSubmission submitTickets={this.submitTickets.bind(this)} ticketCategoryList={this.state.ticketCategoryList} />;
+      main = <TicketSubmission viewSeatingChart={this.viewSeatingChart.bind(this)} submitTickets={this.submitTickets.bind(this)} ticketCategoryList={this.state.ticketCategoryList} />;
     } else if (isAuthenticated && user.role === 'mentor') {
       // reserved for mentor view
     } else if (isAuthenticated && user.role === 'admin') {
