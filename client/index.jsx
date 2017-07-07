@@ -302,6 +302,7 @@ class App extends React.Component {
         <div className="container">
           <Feedback countStars={this.state.countStars} review={this.state.review} handleRatingClick={this.handleRatingClick.bind(this)} handleReview={this.handleReview.bind(this)} getLatestClosedTicket={this.getLatestClosedTicket.bind(this)}/>
           {main}
+          <SeatingChart/>
           {list}
         </div>
       </div>
