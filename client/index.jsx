@@ -366,6 +366,7 @@ class App extends React.Component {
         <div className="container">
           {feedback}
           {main}
+          <SeatingChart/>
           {list}
         </div>
       </div>
