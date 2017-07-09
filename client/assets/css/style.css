@@ -222,31 +222,61 @@ h6:last-child {
   clear: both;
 }
 
-.isession_button {
-  float: right;
+.interactive {
+  display: flex;
+  flex-flow: column;
+  height: 100vh - 40px;
+  width: 100vw;
+  margin: 0px;
+  outline: 1px dashed red;
 }
 
-#chat {
+.isession_button {
+  flex: 0 1 auto;
+}
+
+.iElementContainer {
+  display: flex;
+  flex-flow: row;
+  outline: 1px dashed red;
+}
+
+.leftGroup {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.chat {
+  display: flex;
+  outline: 1px dashed red;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.whiteboard {
+  display: flex;
+  outline: 1px dashed red;
+  height: 100vh;
+  flex-grow: 3;
+  flex-shrink: 1;
+}
+
+
+.messsages {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 100%;
-  margin-right: .5%;
-  box-sizing: border-box;
 }
 
 .chatInput {
   margin: 0;
   padding: 0;
-  width: 94%;
-  margin-right: .5%;
-  box-sizing: border-box;
 }
 
 .chatButton {
-  width: 5%;
   margin: 2px;
-  box-sizing: border-box;
 }
 
 #chat li:nth-child(odd) {
@@ -255,8 +285,6 @@ h6:last-child {
 
 .chatEntry {
   padding: 5px 10px;
-  width: 100%;
-  margin-right: .5%;
 }
 
 .alert {
