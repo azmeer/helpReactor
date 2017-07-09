@@ -352,7 +352,7 @@ class App extends React.Component {
     } else if (isAuthenticated && user.role === 'mentor' && !this.state.sessionIsActive) {
       list = ticketList;
     } else if (isAuthenticated && user.role === 'mentor' && this.state.sessionIsActive) {
-      main = interactiveSession;
+       main = interactiveSession;
     } else if (isAuthenticated && user.role === 'admin') {
       main = adminDashboard;
       list = ticketList;
@@ -366,7 +366,6 @@ class App extends React.Component {
         <div className="container">
           {feedback}
           {main}
-          <SeatingChart/>
           {list}
         </div>
       </div>
