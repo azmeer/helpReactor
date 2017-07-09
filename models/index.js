@@ -55,6 +55,7 @@ const findTickets = (req, res) => {
 };
 
 const updateTickets = (req, res) => {
+  console.log('trying to update tickets: ', req.body);
   if (req.body.status === 'Claimed') {
     req.body.claimedAt = new Date();
   }
