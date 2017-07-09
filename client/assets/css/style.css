@@ -248,38 +248,52 @@ h6:last-child {
   flex-shrink: 1;
 }
 
+.whiteboard {
+  display: flex;
+  outline: 1px dashed red;
+  height: 85vh;
+  flex-grow: 3;
+  flex-shrink: 1;
+}
+
 .chat {
   display: flex;
+  flex-flow: column;
   outline: 1px dashed red;
   flex-grow: 1;
   flex-shrink: 1;
 }
 
-.whiteboard {
-  display: flex;
-  outline: 1px dashed red;
-  height: 100vh;
-  flex-grow: 3;
-  flex-shrink: 1;
-}
-
-
 .messsages {
+  display: flex;
+  flex-grow:9;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
+.chatBar {
+  display: flex;
+  flex-grow:1;
+  display: flex;
+  flex-flow: row;
+}
 .chatInput {
+  display: flex;
+  flex-grow: 1;
   margin: 0;
   padding: 0;
+  margin-top: auto;
+  height: 25px;
 }
 
-.chatButton {
-  margin: 2px;
+.sendButton {
+  margin: 0x;
+  margin-top: auto;
+  height: 25px;
 }
 
-#chat li:nth-child(odd) {
+.chat li:nth-child(odd) {
   background: #eee;
 }
 
