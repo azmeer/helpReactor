@@ -14,13 +14,13 @@ class StarRating extends React.Component {
           'Quality Score'. You should take into account how helpful, professional, and knowledgable your mentor was
         </h6>
 
-        <div className="center">
+        <div className="starrow">
           <div className="btn-group" data-toggle="buttons">  
-            <div onClick={this.props.handleRatingClick} data-location='1' className='star-station' ><span>1</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='2' className='star-station' ><span>2</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='3' className='star-station' ><span>3</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='4' className='star-station' ><span>4</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='5' className='star-station' ><span>5</span></div>
+            <div onClick={this.props.handleRatingClick} data-location='1' className='star' ><span className="letterLine">1</span></div>
+            <div onClick={this.props.handleRatingClick} data-location='2' className='star' ><span className="letterLine">2</span></div>
+            <div onClick={this.props.handleRatingClick} data-location='3' className='star' ><span className="letterLine">3</span></div>
+            <div onClick={this.props.handleRatingClick} data-location='4' className='star' ><span className="letterLine">4</span></div>
+            <div onClick={this.props.handleRatingClick} data-location='5' className='star' ><span className="letterLine">5</span></div>
           </div>
         </div>
 

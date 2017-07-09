@@ -8,10 +8,8 @@ const Review = ({handleReview}) => (
       Please write a few sentences to describe your experience with this mentor. We also recommend writing down what
       you talked about in this session. This review is very important for the mentor, as it can influence other students 
       who are interested in learning with this mentor.
-    </h6>
-    <div className="col-xs-10">
-      <textarea className='ticket_submission_description' className="form-control" name="description" placeholder="" onInput={handleReview}></textarea>
-    </div>
+    </h6>     
+    <textarea className='ticket_submission_description' className="form-control" name="description" placeholder="" onInput={handleReview}></textarea>
   </div>
 );
 

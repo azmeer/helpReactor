@@ -50,7 +50,6 @@ class TicketSubmission extends React.Component {
 
                 <SeatingChart clickSeating={this.clickSeating.bind(this)}/>
 
-
                 <button
                   type="button"
                   className="btn btn-primary"

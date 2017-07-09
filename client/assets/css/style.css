@@ -154,11 +154,11 @@ h6:last-child {
 
 .ticket_submission_form {
   border-bottom: 2px solid #ccc;
-  margin: 0 0 20px 0;
-  padding: 0 0 20px 0;
+  /*padding: 0 0 20px 0;*/
 }
 
 #ticket_submission_description {
+  margin-top: 10px;
   height: 34px;
   resize: none;
   transition: all 0.5s ease;
@@ -172,9 +172,9 @@ h6:last-child {
   margin-top: 10px;
 }
 
-.feedback{
+/*.feedback{
   padding: 20px;
-}
+}*/
 
 #wait_time {
   color: white;
@@ -289,6 +289,28 @@ h6:last-child {
   justify-content: flex-start;
 }
 
+.star {
+  display: inline-block;
+  border: 1px solid;
+  width: 45px;
+  height: 45px;
+  margin: 4px;
+  text-align: center;
+  background-color: lightblue;
+  opacity: 0.7;
+  border: 3px solid #73AD21;
+  /*line-height: -10px;*/
+}
+
+.star:hover {
+  background-color: lightblue;
+  opacity: 1;
+}
+
+.star:active {
+  border: 4px solid white;
+}
+
 .mentor-section {
   border: 1px solid;
   width: 240px;
@@ -300,7 +322,7 @@ h6:last-child {
 
 .station {
   border: 1px solid;
-  width: 40px;
+  width: 80px;
   height: 30px;
   text-align: center;
   background-color: lightblue;
@@ -316,27 +338,7 @@ h6:last-child {
 .station:active {
   border: 4px solid white;
 }
-.star-station {
-  display: inline-block;
-  border: 1px solid;
-  width: 30px;
-  height: 30px;
-  margin: 2px;
-  text-align: center;
-  background-color: lightblue;
-  opacity: 0.7;
-  border: 3px solid #73AD21;
-  /*line-height: -10px;*/
-}
 
-.star-station:hover {
-  background-color: lightblue;
-  opacity: 1;
-}
-
-.star-station:active {
-  border: 4px solid white;
-}
 
 .row-2 {
   display: flex;
@@ -356,16 +358,27 @@ h6:last-child {
   margin-bottom: 20px;
 }
 
-.center {
-  width: 50%;
+.starrow {
+  /*width: 50%;*/
+  /*height: auto;*/
+  width: 270px;
   height: auto;
-  margin: 0 auto;
+  margin: 20px auto;
   position: relative;
+
+}
+.modal-header{
+  background-color:#ccc;
 }
 
 span {
   position: relative;
   top: 18%;
+}
+
+.letterLine {
+  position: relative;
+  top: 25%
 }
 
 .htable {
@@ -382,19 +395,11 @@ span {
   line-height: 19px
 }
 
-#myModalFeedback {
-  width: 700px;
-  max-height: 1000px;
-}
-.modal-header{
-  background-color:#ccc;
+#chartdiv {
+  width: 100%;
+  height: 500px;
 }
 
-#review_description {
-  height: 34px;
-  resize: none;
-  transition: all 0.5s ease;
-}
 /*
 .selected-station {
   background-color: blue;

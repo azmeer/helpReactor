@@ -12,6 +12,7 @@ import SeatingChart from './components/seatingChart.jsx';
 import Feedback from './components/feedback.jsx';
 import InteractiveSession from './components/interactiveSession.jsx';
 
+
 class App extends React.Component {
   constructor() {
     super();
@@ -351,7 +352,7 @@ class App extends React.Component {
     } else if (isAuthenticated && user.role === 'mentor' && !this.state.sessionIsActive) {
       list = ticketList;
     } else if (isAuthenticated && user.role === 'mentor' && this.state.sessionIsActive) {
-       main = interactiveSession;
+      main = interactiveSession;
     } else if (isAuthenticated && user.role === 'admin') {
       main = adminDashboard;
       list = ticketList;

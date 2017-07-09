@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 
+
 class TicketEntry extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +34,7 @@ class TicketEntry extends React.Component {
   }
 
   claimTicket(){
-    this.props.updateTickets({ id: this.props.ticket.id, status: 'Claimed' })
+    this.props.updateTickets({ id: this.props.ticket.id, status: 'Claimed' });
   }
 
   render() {
