@@ -154,6 +154,8 @@ h6:last-child {
 
 .ticket_submission_form {
   border-bottom: 2px solid #ccc;
+  margin: 0 0 20px 0;
+  padding: 0 0 20px 0;
   /*padding: 0 0 20px 0;*/
 }
 
