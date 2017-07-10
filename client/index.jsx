@@ -253,7 +253,7 @@ class App extends React.Component {
     const signOffMessage = {
       to: this.state.sessionPartner,
       event: 'sign off session'
-    }
+    };
     this.sendP2P(signOffMessage);
     this.deactivateSession();
   }

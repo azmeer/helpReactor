@@ -16,7 +16,7 @@ const Feedback = ({countStars, review, handleRatingClick, handleReview, getLates
           <div className="modal-body">
 
             <div className="feedback-center">
-              <StarRating countStars={countStars} handleRatingClick={handleRatingClick}/>
+              <StarRating countStars={countStars} handleRatingClick={handleRatingClick} />
               <Review review={review} handleReview={handleReview}/>
             </div>
 

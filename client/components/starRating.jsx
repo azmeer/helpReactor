@@ -4,7 +4,26 @@ import ReactDOM from 'react-dom';
 class StarRating extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      active: null
+    };
   }
+
+  toggle(position) {
+    if (this.state.active === position) {
+      this.setState({ active: null});
+    } else {
+      this.setState({ active: position});
+    }
+  }
+
+  myColor(position) {
+    if (this.state.active === position) {
+      return 'green';
+    }
+    return '';
+  }
+
   render() {
     return (
       <div className="review">
@@ -16,11 +35,11 @@ class StarRating extends React.Component {
 
         <div className="starrow">
           <div className="btn-group" data-toggle="buttons">  
-            <div onClick={this.props.handleRatingClick} data-location='1' className='star' ><span className="letterLine">1</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='2' className='star' ><span className="letterLine">2</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='3' className='star' ><span className="letterLine">3</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='4' className='star' ><span className="letterLine">4</span></div>
-            <div onClick={this.props.handleRatingClick} data-location='5' className='star' ><span className="letterLine">5</span></div>
+            <div onClick={this.props.handleRatingClick} style={{backgroundColor: this.myColor(1)}} onClick={() => { this.toggle(1); }} data-location='1' className='star' ><span className="letterLine">1</span></div>
+            <div onClick={this.props.handleRatingClick} style={{backgroundColor: this.myColor(2)}} onClick={() => { this.toggle(2); }} data-location='2' className='star' ><span className="letterLine">2</span></div>
+            <div onClick={this.props.handleRatingClick} style={{backgroundColor: this.myColor(3)}} onClick={() => { this.toggle(3); }} data-location='3' className='star' ><span className="letterLine">3</span></div>
+            <div onClick={this.props.handleRatingClick} style={{backgroundColor: this.myColor(4)}} onClick={() => { this.toggle(4); }} data-location='4' className='star' ><span className="letterLine">4</span></div>
+            <div onClick={this.props.handleRatingClick} style={{backgroundColor: this.myColor(5)}} onClick={() => { this.toggle(5); }} data-location='5' className='star' ><span className="letterLine">5</span></div>
           </div>
         </div>
 
