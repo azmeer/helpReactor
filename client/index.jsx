@@ -10,6 +10,7 @@ import Header from './components/header.jsx';
 import AdminDashboard from './components/adminDashboard.jsx';
 import SeatingChart from './components/seatingChart.jsx';
 import Feedback from './components/feedback.jsx';
+import InteractiveSession from './components/interactiveSession.jsx';
 
 
 class App extends React.Component {
@@ -26,7 +27,10 @@ class App extends React.Component {
       location: '',
       countStars: null,
       review: null,
-      ticket: null
+      ticket: null,
+      ticketClaimed: false,
+      sessionPartner: { firstName: 'anonymous' },
+      sessionIsActive: null,
     };
   }
 
@@ -71,6 +75,12 @@ class App extends React.Component {
     this.socket.on('user connect', data => this.setState({ onlineUsers: data }));
 
     this.socket.on('user disconnect', data => this.setState({ onlineUsers: data }));
+
+    this.socket.on('initiate session', options => this.setUpClientSession(options));
+
+    this.socket.on('invitation response', options => this.handleSessionResponse(options));
+
+    this.socket.on('sign off session', options => this.partnerSignedOff(options));
     
     this.getTickets(option);
   }
@@ -88,10 +98,6 @@ class App extends React.Component {
     this.setState({
       review: evt.target.value
     });
-  }
-
-  handleLocationChange(evt) {
-    this.setState({location: evt.target.value});
   }
 
   getTickets(option) {
@@ -218,6 +224,64 @@ class App extends React.Component {
     return $('.claim_btn').prop('disabled', false);
   }
 
+  sendP2P(options) {
+    options.from = this.state.user;
+    options.to = options.to || this.state.sessionPartner;
+    this.socket.emit('p2p', options);
+  }
+
+  activateSession(options) {
+    this.setState({
+      sessionIsActive: true,
+      sessionPartner: options.from
+    });
+  }
+
+  deactivateSession() {
+    this.setState({
+      sessionIsActive: false,
+      sessionPartner: { firstName: 'anonymous' }
+    });
+  }
+
+  partnerSignedOff(options) {
+    alert(`${options.from.firstName} signed off`);
+    this.deactivateSession();
+  }
+  
+  signOff() {
+    const signOffMessage = {
+      to: this.state.sessionPartner,
+      event: 'sign off session'
+    };
+    this.sendP2P(signOffMessage);
+    this.deactivateSession();
+  }
+  
+  setUpClientSession(options) {
+    const response = {
+      to: options.from,
+      event: 'invitation response',
+      ticket: options.ticket,
+      isAccepted: false
+    };
+
+    if ( confirm(`Mentor ${options.from.firstName} would like to connect for an interactive session regarding ${options.ticket.description}. Would you like to connect?`) ) {
+      this.activateSession(options);
+      response.isAccepted = true;
+    }
+    this.sendP2P(response);
+  }
+
+  handleSessionResponse(options) {
+    if (options.isAccepted) {
+      this.activateSession(options);
+      this.updateTickets({ id: options.ticket.id, status: 'Claimed' });
+    } else {
+      alert('Session invitation declined');
+    }
+  }
+  
   render() {
     let user = this.state.user;
     let isAuthenticated = this.state.isAuthenticated;
@@ -226,44 +290,81 @@ class App extends React.Component {
     let main = null;
     let list = null;
 
+    let login = <Login />;
+    
+    let feedback = <Feedback
+      countStars={this.state.countStars}
+      review={this.state.review}
+      handleRatingClick={this.handleRatingClick.bind(this)}
+      handleReview={this.handleReview.bind(this)}
+      getLatestClosedTicket={this.getLatestClosedTicket.bind(this)}
+    />;
+
+    let ticketSubmission = <TicketSubmission
+      submitTickets={this.submitTickets.bind(this)}
+      ticketCategoryList={this.state.ticketCategoryList}
+      location={this.state.location}
+      getLatestClosedTicket={this.getLatestClosedTicket.bind(this)}
+      countStars={this.state.countStars}
+      review={this.state.review}
+      handleRatingClick={this.handleRatingClick.bind(this)}
+      handleReview={this.handleReview.bind(this)}
+    />;
+
+    let ticketList = <TicketList
+      sendP2P={this.sendP2P.bind(this)}
+      user={this.state.user}
+      ticketList={this.state.ticketList}
+      updateTickets={this.updateTickets.bind(this)}
+      hasClaimed={this.state.hasClaimed}
+    />;
+
+    let adminDashboard = <AdminDashboard
+      filterTickets={this.filterTickets.bind(this)}
+      onlineUsers={this.state.onlineUsers}
+      adminStats={this.state.statistic}
+      ticketCategoryList={this.state.ticketCategoryList}
+    />;
+
+    let interactiveSession = <InteractiveSession
+      user={this.state.user}
+      partner={this.state.sessionPartner}
+      socket={this.socket}
+      signOff={this.signOff.bind(this)}
+      sendP2P={this.sendP2P.bind(this)}
+    />;
+    
     if (isAuthenticated) {
       nav = <Nav user={this.state.user} />;
       header = <Header statistic={this.state.statistic} onlineUsers={this.state.onlineUsers} user={this.state.user} waitTime={this.state.waitTime}/>;
-      list = <TicketList user={this.state.user} ticketList={this.state.ticketList} 
-        updateTickets={this.updateTickets.bind(this)} 
-        hasClaimed={this.state.hasClaimed} 
-      />;
+      list = ticketList;
     }
 
     if (!isAuthenticated) {
       document.querySelector('BODY').style.backgroundColor = '#2b3d51';
-      main = <Login />;
-    } else if (isAuthenticated && user.role === 'student') {
-      main = <TicketSubmission 
-        handleLocationChange={this.handleLocationChange.bind(this)} 
-        submitTickets={this.submitTickets.bind(this)} 
-        ticketCategoryList={this.state.ticketCategoryList} 
-        location={this.state.location}
-        getLatestClosedTicket={this.getLatestClosedTicket.bind(this)} 
-        countStars={this.state.countStars} 
-        review={this.state.review} 
-        handleRatingClick={this.handleRatingClick.bind(this)}
-        handleReview={this.handleReview.bind(this)}
-      />;
-    } else if (isAuthenticated && user.role === 'mentor') {
-      // reserved for mentor view
+      main = login;
+    } else if (isAuthenticated && user.role === 'student' && !this.state.sessionIsActive) {
+      main = ticketSubmission;
+      list = ticketList;
+    } else if (isAuthenticated && user.role === 'student' && this.state.sessionIsActive) {
+      main = interactiveSession;
+      list = null;
+    } else if (isAuthenticated && user.role === 'mentor' && !this.state.sessionIsActive) {
+      list = ticketList;
+    } else if (isAuthenticated && user.role === 'mentor' && this.state.sessionIsActive) {
+      main = interactiveSession;
     } else if (isAuthenticated && user.role === 'admin') {
-      main = <AdminDashboard filterTickets={this.filterTickets.bind(this)} onlineUsers={this.state.onlineUsers} adminStats={this.state.statistic} ticketCategoryList={this.state.ticketCategoryList} />;
+      main = adminDashboard;
+      list = ticketList;
     } 
-    
+
     return (
       <div>
         <Alert />
         {nav}
         {header}
         <div className="container">
-          <SeatingChart clickSeating={this.clickSeating.bind(this)}/>
-          <Feedback countStars={this.state.countStars} review={this.state.review} handleRatingClick={this.handleRatingClick.bind(this)} handleReview={this.handleReview.bind(this)} getLatestClosedTicket={this.getLatestClosedTicket.bind(this)}/>
+          {feedback}
           {main}
           {list}
         </div>
