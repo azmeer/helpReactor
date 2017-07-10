@@ -40,10 +40,10 @@ class Chat extends React.Component {
   render() {
     return (
       <div className="chat">
-        <ul className="messages">
+        <div className="chatMessages">
         {this.state.messages.map((tuple, index) =>
-          (<li className="chatEntry" key={index}>{`${tuple[0]} : ${tuple[1]}`}</li>))}
-        </ul>
+          (<div className="chatEntry" key={index}>{`${tuple[0]} : ${tuple[1]}`}</div>))}
+        </div>
         <span className="chatBar">
           <input className="chatInput" type="text" onChange={this.handleKeys} onKeyUp={this.handleKeys} autoComplete="off" value={this.state.currentMessage}/><button className="sendButton" onClick={this.txChat}>Send</button>
         </span>

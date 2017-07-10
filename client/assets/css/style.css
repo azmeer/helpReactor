@@ -265,8 +265,6 @@ h6:last-child {
 }
 
 .chatMessages {
-  display: flex;
-  flex-direction: column;
   overflow-y: scroll;
   overflow-x: hidden;
   flex-shrink: 1;
