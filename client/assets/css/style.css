@@ -228,7 +228,7 @@ h6:last-child {
   height: 100vh - 40px;
   width: 100vw;
   margin: 0px;
-  outline: 1px dashed red;
+  outline: 1px solid grey;
 }
 
 .isession_button {
@@ -238,20 +238,20 @@ h6:last-child {
 .iElementContainer {
   display: flex;
   flex-flow: row;
-  outline: 1px dashed red;
+  outline: 1px solid grey;
 }
 
 .leftGroup {
   display: flex;
   flex-flow: column;
   flex-grow: 1;
-  flex-shrink: 1;
+  flex-shrink: 0;
   position: relative;
 }
 
 .whiteboard {
   display: flex;
-  outline: 1px dashed red;
+  outline: 1px solid grey;
   height: 85vh;
   flex-grow: 3;
   flex-shrink: 1;
@@ -259,35 +259,32 @@ h6:last-child {
 
 .chat {
   display: flex;
-  flex-flow: column;
-  outline: 1px dashed red;
   flex-grow: 1;
-  flex-shrink: 1;
+  flex-direction: column;
+  outline: 1px solid grey;
 }
 
-.messsages {
+.chatMessages {
   display: flex;
-  flex-grow:9;
-  list-style-type: none;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex-shrink: 1;
   margin: 0;
   padding: 0;
-  margin-top: auto;
-  height: 100vh-65px;
-  max-height: 100vh-65px;
 }
 
 .chatBar {
-  display: flex;
-  flex-grow:1;
-  display: flex;
+  position: relative;
   flex-flow: row;
+  margin-top: auto;
 }
+
 .chatInput {
-  display: flex;
   flex-grow: 1;
   margin: 0;
   padding: 0;
-  margin-top: auto;
+  overflow: hidden;
   height: 25px;
 }
 
@@ -295,10 +292,6 @@ h6:last-child {
   margin: 0x;
   margin-top: auto;
   height: 25px;
-}
-
-.chat li:nth-child(odd) {
-  background: #eee;
 }
 
 .chatEntry {
